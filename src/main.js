@@ -3,8 +3,14 @@ let coverImage = document.querySelector('.cover-image');
 let coverTitle = document.querySelector('.cover-title');
 let taglineOne = document.querySelector('.tagline-1');
 let taglineTwo = document.querySelector('.tagline-2');
-let randomCoverButton = document.querySelector('.random-cover-button');
 
+let homeButton = document.querySelector('.home-button');
+let randomCoverButton = document.querySelector('.random-cover-button');
+let makeNewButton = document.querySelector('.make-new-button');
+let saveCoverButton = document.querySelector('.save-cover-button');
+
+let homeView = document.querySelector('.home-view')
+let formView = document.querySelector('.form-view')
 
 // We've provided a few variables below
 let savedCovers = [
@@ -16,6 +22,7 @@ let currentCover;
 // Add your event listeners here 👇
 document.addEventListener('DOMContentLoaded', handleLoad);
 randomCoverButton.addEventListener('click', handleRandomCoverButtonClick);
+makeNewButton.addEventListener('click', handleMakeNewButtonClick);
 
 // Create your event handlers and other functions here 👇
 function handleLoad() {
@@ -32,6 +39,13 @@ function handleRandomCoverButtonClick() {
   coverTitle.innerText = currentCover.title;
   taglineOne.innerText = currentCover.tagline1;
   taglineTwo.innerText = currentCover.tagline2;
+}
+
+function handleMakeNewButtonClick() {
+  homeView.classList.add('hidden');
+  randomCoverButton.classList.add('hidden');
+  saveCoverButton.classList.add('hidden');
+  homeButton.classList.remove('hidden');
 }
 
 // Helper functions
