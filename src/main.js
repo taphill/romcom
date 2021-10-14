@@ -8,9 +8,11 @@ let homeButton = document.querySelector('.home-button');
 let randomCoverButton = document.querySelector('.random-cover-button');
 let makeNewButton = document.querySelector('.make-new-button');
 let saveCoverButton = document.querySelector('.save-cover-button');
+let viewSavedButton = document.querySelector('.view-saved-button');
 
 let homeView = document.querySelector('.home-view')
 let formView = document.querySelector('.form-view')
+let savedView = document.querySelector('.saved-view')
 
 // We've provided a few variables below
 let savedCovers = [
@@ -23,6 +25,8 @@ let currentCover;
 document.addEventListener('DOMContentLoaded', handleLoad);
 randomCoverButton.addEventListener('click', handleRandomCoverButtonClick);
 makeNewButton.addEventListener('click', handleMakeNewButtonClick);
+viewSavedButton.addEventListener('click', handleViewSavedButtonClick);
+homeButton.addEventListener('click', handleHomeButtonClick);
 
 // Create your event handlers and other functions here 👇
 function handleLoad() {
@@ -43,9 +47,32 @@ function handleRandomCoverButtonClick() {
 
 function handleMakeNewButtonClick() {
   homeView.classList.add('hidden');
+  savedView.classList.add('hidden');
   randomCoverButton.classList.add('hidden');
   saveCoverButton.classList.add('hidden');
+
+  formView.classList.remove('hidden');
   homeButton.classList.remove('hidden');
+}
+
+function handleViewSavedButtonClick() {
+  homeView.classList.add('hidden');
+  formView.classList.add('hidden');
+  randomCoverButton.classList.add('hidden');
+  saveCoverButton.classList.add('hidden');
+
+  savedView.classList.remove('hidden');
+  homeButton.classList.remove('hidden');
+}
+
+function handleHomeButtonClick() {
+  homeButton.classList.add('hidden');
+  formView.classList.add('hidden');
+  savedView.classList.add('hidden');
+
+  homeView.classList.remove('hidden');
+  randomCoverButton.classList.remove('hidden');
+  saveCoverButton.classList.remove('hidden');
 }
 
 // Helper functions
