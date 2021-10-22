@@ -34,13 +34,12 @@ makeNewButton.addEventListener('click', handleMakeNewButtonClick);
 viewSavedButton.addEventListener('click', handleViewSavedButtonClick);
 homeButton.addEventListener('click', handleHomeButtonClick);
 createNewBookButton.addEventListener('click', handleCreateNewBookButtonClick);
+saveCoverButton.addEventListener('click', handleSaveCoverButtonClick)
 
 // Create your event handlers and other functions here 👇
 function handleLoad() {
-  coverImage.src = getRandomCoverImage();
-  coverTitle.innerText = getRandomCoverTitle();
-  taglineOne.innerText = getRandomDescriptor();
-  taglineTwo.innerText = getRandomDescriptor();
+  generateNewCover()
+  displayCurrentCover()
 }
 
 function handleHomeViewLoad() {
@@ -100,11 +99,20 @@ function handleCreateNewBookButtonClick() {
   handleHomeButtonClick()
 }
 
-function displayCurrentCover() {
-  coverImage.src = currentCover.cover;
-  coverTitle.innerText = currentCover.title;
-  taglineOne.innerText = currentCover.tagline1;
-  taglineTwo.innerText = currentCover.tagline2;
+function handleSaveCoverButtonClick() {
+  const image = currentCover.cover
+  const title = currentCover.title
+  const descriptor1 = currentCover.tagline1
+  const descriptor2 = currentCover.tagline2
+
+  const newCover = new Cover(image, title, descriptor1, descriptor2)
+
+  if (coverHasBeenSaved(newCover)) {
+    window.alert("This cover has already been saved.")
+  } else {
+    savedCovers.push(newCover)
+    window.alert("Cover saved!")
+  }
 }
 
 // Helper functions
@@ -124,6 +132,40 @@ function viewSavedCovers() {
       </div>
     ` 
   }
+}
+
+function displayCurrentCover() {
+  coverImage.src = currentCover.cover;
+  coverTitle.innerText = currentCover.title;
+  taglineOne.innerText = currentCover.tagline1;
+  taglineTwo.innerText = currentCover.tagline2;
+}
+
+function coverHasBeenSaved(cover) {
+  const result = savedCovers.some(savedCover => {
+    return shallowEqual(savedCover, cover)
+  })
+
+  return result
+}
+
+function shallowEqual(object1, object2) {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (let key of keys1) {
+    if (key === 'id') {continue}
+
+    if (object1[key] !== object2[key]) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 function generateNewCover() {
