@@ -16,6 +16,7 @@ const formView = document.querySelector('.form-view');
 const savedView = document.querySelector('.saved-view');
 
 const savedCoverSection = document.querySelector('.saved-covers-section')
+let savedCoverElements = document.querySelectorAll('.mini-cover')
 
 const formData = document.querySelectorAll('form input');
 
@@ -118,12 +119,12 @@ function handleSaveCoverButtonClick() {
 // Helper functions
 function viewSavedCovers() {
   for (let i = 0; i < savedCovers.length; i++) {
-    let elementExists = document.getElementById(`cover${i}`)
+    let elementExists = document.getElementById(`cover-${i}`)
 
     if(elementExists) { continue }
 
     savedCoverSection.innerHTML += `
-      <div class="mini-cover" id="cover${i}">
+      <div class="mini-cover" id="cover-${i}" ondblclick="deleteCover(${i})">
         <img class="cover-image" src="${savedCovers[i].cover}">
         <h2 class="cover-title">${savedCovers[i].title}</h2>
         <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
@@ -139,6 +140,11 @@ function displayCurrentCover() {
   coverTitle.innerText = currentCover.title;
   taglineOne.innerText = currentCover.tagline1;
   taglineTwo.innerText = currentCover.tagline2;
+}
+
+function deleteCover(index) {
+  document.getElementById(`cover-${index}`).remove()
+  savedCovers.splice(index, 1)
 }
 
 function coverHasBeenSaved(cover) {
