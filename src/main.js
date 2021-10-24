@@ -28,31 +28,32 @@ let savedCovers = [
 let currentCover;
 
 // Add your event listeners here 👇
-document.addEventListener('DOMContentLoaded', handleLoad);
-homeView.addEventListener('onload', handleHomeViewLoad)
-randomCoverButton.addEventListener('click', handleRandomCoverButtonClick);
-makeNewButton.addEventListener('click', handleMakeNewButtonClick);
-viewSavedButton.addEventListener('click', handleViewSavedButtonClick);
-homeButton.addEventListener('click', handleHomeButtonClick);
-createNewBookButton.addEventListener('click', handleCreateNewBookButtonClick);
-saveCoverButton.addEventListener('click', handleSaveCoverButtonClick)
+document.addEventListener('DOMContentLoaded', pageLoad);
+homeView.addEventListener('onload', loadHomeView)
+randomCoverButton.addEventListener('click', createRandomeCover);
+makeNewButton.addEventListener('click', makeNewCover);
+viewSavedButton.addEventListener('click', loadSavedCoversView);
+homeButton.addEventListener('click', goHome);
+createNewBookButton.addEventListener('click', createNewBook);
+saveCoverButton.addEventListener('click', saveCover)
 
 // Create your event handlers and other functions here 👇
-function handleLoad() {
+function pageLoad() {
   generateNewCover()
   displayCurrentCover()
 }
 
-function handleHomeViewLoad() {
+function loadHomeView() {
   displayCurrentCover()
 }
 
-function handleRandomCoverButtonClick() {
+function createRandomeCover
+() {
   generateNewCover();
   displayCurrentCover()
 }
 
-function handleMakeNewButtonClick() {
+function makeNewCover() {
   homeView.classList.add('hidden');
   savedView.classList.add('hidden');
   randomCoverButton.classList.add('hidden');
@@ -62,7 +63,7 @@ function handleMakeNewButtonClick() {
   homeButton.classList.remove('hidden');
 }
 
-function handleViewSavedButtonClick() {
+function loadSavedCoversView() {
   homeView.classList.add('hidden');
   formView.classList.add('hidden');
   randomCoverButton.classList.add('hidden');
@@ -73,7 +74,7 @@ function handleViewSavedButtonClick() {
   viewSavedCovers();
 }
 
-function handleHomeButtonClick() {
+function goHome() {
   homeButton.classList.add('hidden');
   formView.classList.add('hidden');
   savedView.classList.add('hidden');
@@ -85,7 +86,7 @@ function handleHomeButtonClick() {
   displayCurrentCover()
 }
 
-function handleCreateNewBookButtonClick() {
+function createNewBook() {
   const inputs = [...formData].reduce((object, input) => ({ ...object, [input.id]: input.value }), {}) 
 
   covers.push(inputs.cover)
@@ -97,10 +98,10 @@ function handleCreateNewBookButtonClick() {
 
   currentCover = newCover
 
-  handleHomeButtonClick()
+  goHome()
 }
 
-function handleSaveCoverButtonClick() {
+function saveCover() {
   const image = currentCover.cover
   const title = currentCover.title
   const descriptor1 = currentCover.tagline1
